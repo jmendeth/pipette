@@ -630,6 +630,32 @@ was requested will be if the stream ends without there being at least
 callback will get passed `true` for the error flag.
 
 
+Tee
+---
+
+The `Tee` class is a bidirectional multiplexer that will forward any
+data it recieves to a given list of writable streams. Besides, any
+`pipe` or `drain` events from a target will be re-emitted by the `Tee`.
+
+`Tee`s are very sensible to what happens to their destinations:
+one of the targets being closed will result in shutting down the
+entire instance.
+
+The `Tee` class doesn't have any custom methods; it provides the
+Writable Stream API.
+
+When the `Tee` is closed using the `end` method, all its targets will
+be equally closed. TODO: This can be altered with the `end` option
+(see below).
+
+### var tee = new Tee(streams, [options])
+
+Constructs and returns a new `Tee`. `streams` must be an array
+of writable streams to which data will be forwarded.
+
+TODO: explain options
+
+
 Valve
 -----
 
@@ -734,7 +760,7 @@ Contributing
 ------------
 
 Questions, comments, bug reports, and pull requests are all welcome.
-Submit them at [the project on GitHub](https://github.com/Obvious/pipette/).
+Submit them at [the project on GitHub](https://github.com/Obvious/pipette).
 
 Bug reports that include steps-to-reproduce (including code) are the
 best. Even better, make them in the form of pull requests that update
